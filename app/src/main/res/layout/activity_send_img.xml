@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/linear"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#039c9c9c"
+              android:orientation="vertical">
+
+
+    <EditText
+        android:id="@+id/edit_comment"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_margin="8dp"
+        android:background="#ffffff"
+        android:gravity="top"
+        android:hint="请输入文字"
+        android:paddingTop="2dp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView_take_part_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+    </android.support.v7.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/bt_submit"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="10dp"
+        android:background="#30000033"
+        android:text="提  交"
+        android:textColor="#ffffff"
+        android:textSize="20dp"/>
+</LinearLayout>
