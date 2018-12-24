@@ -56,10 +56,17 @@ public class MyScrollButtonActivity extends Activity {
     int winHeigth;
 
     private void initData() {
-        //2、通过Resources获取
+        //通过Resources获取
         DisplayMetrics dm = getResources().getDisplayMetrics();
         winHeigth = dm.heightPixels;
         winWidh = dm.widthPixels;
+        //获取状态栏高度
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        winHeigth = winHeigth - result;
         startBtn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

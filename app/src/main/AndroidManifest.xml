@@ -56,6 +56,7 @@
         <activity android:name="activity.JieTuActivity"/>
         <activity android:name="activity.MineFloatActionButto"/>
         <activity android:name="activity.HuaDongXianShiYinCang"/>
+        <activity android:name=".MyAnimationActivity"/>
         <activity android:name=".MyMPAndroidChart"/>
         <activity android:name="activity.MyScrollButtonActivity"/>
         <!--android:configChanges="orientation"-->
