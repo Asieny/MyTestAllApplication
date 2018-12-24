@@ -19,6 +19,7 @@ import ZDYview.MyTextView;
 import activity.HuaDongXianShiYinCang;
 import activity.JieTuActivity;
 import activity.MineFloatActionButto;
+import activity.MyScrollButtonActivity;
 import adapter.TitleAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -73,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
         mData.add("floatButton");
         mData.add("滑动显示隐藏");
         mData.add("MPAndroidChart");
+        mData.add("动画效果界面");
+        mData.add("upDataOnline");
+        mData.add("ForMQTT");
+        mData.add("ForMyScrollButton");
         TitleAdapter titleAdapter = new TitleAdapter(MainActivity.this, mData);
         listView.setAdapter(titleAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -93,6 +98,18 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if ("MPAndroidChart".equals(title)) {
                     Intent intent = new Intent(MainActivity.this, MyMPAndroidChart.class);
+                    startActivity(intent);
+                }
+                if ("动画效果界面".equals(title)) {//动画测试
+                    Intent intent = new Intent(MainActivity.this, MyAnimationActivity.class);
+                    startActivity(intent);
+                }
+                if ("upDataOnline".equals(title)) {//在线更新
+                    String url = "http://112.90.178.68:8081/upFiles/upload/files/20181204/smartHox12-04-02_1543921756533.apk";
+
+                }
+                if ("ForMyScrollButton".equals(title)) {//在线更新
+                    Intent intent = new Intent(MainActivity.this, MyScrollButtonActivity.class);
                     startActivity(intent);
                 }
             }
