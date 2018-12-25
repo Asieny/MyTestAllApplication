@@ -1,12 +1,12 @@
 package com.ithei.andy.myapplication;
 
-import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 
 /**
@@ -46,13 +46,14 @@ public class MyAnimationActivity extends Activity implements View.OnClickListene
 
     private void initData() {
         animatorT = ObjectAnimator.ofFloat(startBtn, "translationX", 0f, 10f, 50f, 100f, 200f, 0f);
+        animatorT.setInterpolator(new LinearInterpolator());
         PropertyValuesHolder scx = PropertyValuesHolder.ofFloat("scaleX", 2.0f, 1f);
         PropertyValuesHolder scy = PropertyValuesHolder.ofFloat("scaleY", 2.0f,3f,1f);
         animatorSc = ObjectAnimator.ofPropertyValuesHolder(startBtn, scx, scy);
         animatorXz = ObjectAnimator.ofFloat(startBtn, "rotation",0f,90f, 180f, 0f);
         animatorTm = ObjectAnimator.ofFloat(startBtn, "alpha",1f,0.5f, 0.1f, 1f);
 
-        Animator animator = AnimatorInflater.loadAnimator(MyAnimationActivity.this, R.animator.set_animator);
+        ObjectAnimator animator =(ObjectAnimator) AnimatorInflater.loadAnimator(MyAnimationActivity.this, R.animator.set_animator);
         // 载入XML动画
         animator.setTarget(startBtn);
         // 设置动画对象

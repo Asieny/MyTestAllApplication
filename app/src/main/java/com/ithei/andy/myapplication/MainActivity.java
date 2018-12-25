@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         mData.add("滑动显示隐藏");
         mData.add("MPAndroidChart");
         mData.add("动画效果界面");
-        mData.add("upDataOnline");
+        mData.add("upDataOnline使用retrofit");
         mData.add("ForMQTT");
         mData.add("ForMyScrollButton");
         TitleAdapter titleAdapter = new TitleAdapter(MainActivity.this, mData);
@@ -104,11 +104,11 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, MyAnimationActivity.class);
                     startActivity(intent);
                 }
-                if ("upDataOnline".equals(title)) {//在线更新
-                    String url = "http://112.90.178.68:8081/upFiles/upload/files/20181204/smartHox12-04-02_1543921756533.apk";
-
+                if ("upDataOnline使用retrofit".equals(title)) {//在线更新
+                    Intent intent = new Intent(MainActivity.this, MyRetrofitActivity.class);
+                    startActivity(intent);
                 }
-                if ("ForMyScrollButton".equals(title)) {//在线更新
+                if ("ForMyScrollButton".equals(title)) {
                     Intent intent = new Intent(MainActivity.this, MyScrollButtonActivity.class);
                     startActivity(intent);
                 }

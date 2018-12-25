@@ -1,8 +1,10 @@
 package activity;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -10,7 +12,6 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 import com.ithei.andy.myapplication.R;
-import com.yixia.camera.util.Log;
 
 /**
  * @创建者 AndyYan
@@ -20,11 +21,13 @@ import com.yixia.camera.util.Log;
  * @更新时间 $Date$
  * @更新描述 ${TODO}
  */
-public class MyScrollButtonActivity extends Activity {
+public class MyScrollButtonActivity extends Activity implements View.OnClickListener {
     private RelativeLayout rlt_title;
     private ScrollView     scrollView;
     private Button         startBtn;
+    private Button         hideBtn;
     private String TAG = "距离：";
+    private ObjectAnimator animatorT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class MyScrollButtonActivity extends Activity {
         rlt_title = (RelativeLayout) findViewById(R.id.rlt_title);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
         startBtn = (Button) findViewById(R.id.startBtn);
+        hideBtn = (Button) findViewById(R.id.hideBtn);
     }
 
     int downLeft;
@@ -56,7 +60,10 @@ public class MyScrollButtonActivity extends Activity {
     int winHeigth;
 
     private void initData() {
-        //通过Resources获取
+        animatorT = ObjectAnimator.ofFloat(hideBtn, "translationX", 0f, 10f, 50f, 100f, 200f);
+        startBtn.setOnClickListener(this);
+
+        //通过Resources获取屏幕宽高
         DisplayMetrics dm = getResources().getDisplayMetrics();
         winHeigth = dm.heightPixels;
         winWidh = dm.widthPixels;
@@ -107,6 +114,7 @@ public class MyScrollButtonActivity extends Activity {
 
                         Log.i(TAG, "left" + finalLeft + ",top" + finalTop + ",right" + finalRight + ",bottom" + finalBottom);
                         v.layout(finalLeft, finalTop, finalRight, finalBottom);
+                        hideBtn.layout(finalLeft, finalTop, finalRight, finalBottom);
                         downLeft = moveLeft;
                         downTop = moveTop;
                         viewLeft = v.getLeft();
@@ -142,6 +150,37 @@ public class MyScrollButtonActivity extends Activity {
                 return false;
             }
         });
+        //        scrollView.setOnTouchListener(new View.OnTouchListener() {
+        //            @Override
+        //            public boolean onTouch(View v, MotionEvent event) {
+        //                switch (event.getAction()) {
+        //                    case MotionEvent.ACTION_DOWN:
+        //                        scDownY = (int) event.getRawY();
+        //                        break;
+        //                    case MotionEvent.ACTION_MOVE:
+        //                        scMoveY = (int) event.getRawY();
+        //                        rltTop = rltTop + (scMoveY - scDownY);
+        //                        rltBot = rltTop + rlt_title.getHeight();
+        //
+        //                        if (rltTop >= 0) {
+        //                            rltTop = 0;
+        //                            rltBot = rltTop + rlt_title.getHeight();
+        //                        }
+        //                        if (rltBot <= 0) {
+        //                            rltBot = 0;
+        //                            rltTop = rltBot - rlt_title.getHeight();
+        //                        }
+        //
+        //                        rlt_title.layout(0, rltTop, rlt_title.getWidth(), rltBot);
+        //                        scDownY = (int) event.getRawY();
+        //                        rltTop = rlt_title.getTop();
+        //                        break;
+        //                    case MotionEvent.ACTION_UP:
+        //                        break;
+        //                }
+        //                return false;
+        //            }
+        //        });
         scrollView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -165,6 +204,9 @@ public class MyScrollButtonActivity extends Activity {
 
                         rlt_title.layout(0, rltTop, rlt_title.getWidth(), rltBot);
 
+                        alpha = (rlt_title.getHeight() - Math.abs(rltTop)) * 255 / rlt_title.getHeight();
+                        rlt_title.getBackground().mutate().setAlpha(alpha);
+
                         scDownY = (int) event.getRawY();
                         rltTop = rlt_title.getTop();
                         break;
@@ -176,9 +218,19 @@ public class MyScrollButtonActivity extends Activity {
         });
     }
 
+    int alpha;
     int scDownY;
     int scMoveY;
     int rltTop;
     int rltBot;
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.startBtn:
+                animatorT.setDuration(2000);
+                animatorT.start();
+                break;
+        }
+    }
 }
