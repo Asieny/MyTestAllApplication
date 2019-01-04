@@ -17,3 +17,17 @@
 #}
 -keep class com.baidu.ocr.sdk.**{*;}
 -dontwarn com.baidu.ocr.**
+
+# Retrofit
+-dontnote retrofit2.Platform
+-dontnote retrofit2.Platform$IOS$MainThreadExecutor
+-dontwarn retrofit2.Platform$Java8
+-keepattributes Signature
+-keepattributes Exceptions
+
+# okhttp
+-dontwarn okio.**
+
+# Gson
+-keep class com.example.testing.retrofitdemo.bean.**{*;} # 自定义数据模型的bean目录
+

@@ -82,10 +82,10 @@ public class MyScrollButtonActivity extends Activity implements View.OnClickList
                 switch (ea) {
                     case MotionEvent.ACTION_DOWN: // 按下
 
-                        viewLeft = v.getLeft();
-                        viewTop = v.getTop();
+                        viewLeft = v.getLeft();//获取按钮的左坐标(在屏幕上的位置)
+                        viewTop = v.getTop();//获取按钮的上坐标
 
-                        downLeft = (int) event.getRawX();
+                        downLeft = (int) event.getRawX();//获取点击位置(距离屏幕原点横坐标)
                         downTop = (int) event.getRawY();
                         break;
                     case MotionEvent.ACTION_MOVE: // 移动
@@ -93,8 +93,12 @@ public class MyScrollButtonActivity extends Activity implements View.OnClickList
                         moveLeft = (int) event.getRawX();
                         moveTop = (int) event.getRawY();
 
+                        //view最终左坐标(移动后)
                         finalLeft = viewLeft + (moveLeft - downLeft);
+                        //view最终上坐标
                         finalTop = viewTop + (moveTop - downTop);
+
+                        //判断，不使按钮移出屏幕外
                         if (finalLeft <= 0) {
                             finalLeft = 0;
                         }
@@ -111,12 +115,15 @@ public class MyScrollButtonActivity extends Activity implements View.OnClickList
                             finalBottom = winHeigth;
                             finalTop = finalBottom - v.getHeight();
                         }
-
                         Log.i(TAG, "left" + finalLeft + ",top" + finalTop + ",right" + finalRight + ",bottom" + finalBottom);
+
+                        //重置按钮的位置
                         v.layout(finalLeft, finalTop, finalRight, finalBottom);
                         hideBtn.layout(finalLeft, finalTop, finalRight, finalBottom);
+                        //重新设置初始移动位置
                         downLeft = moveLeft;
                         downTop = moveTop;
+                        //设置移动后，获取view的左坐标
                         viewLeft = v.getLeft();
                         viewTop = v.getTop();
                         break;

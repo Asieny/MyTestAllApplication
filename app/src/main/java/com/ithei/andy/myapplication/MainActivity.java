@@ -19,6 +19,7 @@ import ZDYview.MyTextView;
 import activity.HuaDongXianShiYinCang;
 import activity.JieTuActivity;
 import activity.MineFloatActionButto;
+import activity.MineTXFaceKnowlegeActivity;
 import activity.MyScrollButtonActivity;
 import adapter.TitleAdapter;
 
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         mData.add("upDataOnline使用retrofit");
         mData.add("ForMQTT");
         mData.add("ForMyScrollButton");
+        mData.add("腾讯人脸识别");
         TitleAdapter titleAdapter = new TitleAdapter(MainActivity.this, mData);
         listView.setAdapter(titleAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -110,6 +112,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if ("ForMyScrollButton".equals(title)) {
                     Intent intent = new Intent(MainActivity.this, MyScrollButtonActivity.class);
+                    startActivity(intent);
+                }
+                if ("腾讯人脸识别".equals(title)) {
+                    Intent intent = new Intent(MainActivity.this, MineTXFaceKnowlegeActivity.class);
                     startActivity(intent);
                 }
             }
